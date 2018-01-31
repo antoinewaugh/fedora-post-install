@@ -38,6 +38,7 @@ dir="$(dirname "$0")"
 . $dir/functions/thirdparty
 . $dir/functions/update
 . $dir/functions/nvidia
+. $dir/functions/machinelearning
 . $dir/functions/utilities
 
 
@@ -80,6 +81,7 @@ function main {
 		thirdparty		'Install third-party applications' \
 		repositories	'Add third-party repositories' \
 		nvidia		'Install NVIDIA Driver (requires third party repositories)' \
+		machinelearning 'Install machine learning tools' \
 		configure		'Configure system' \
 		cleanup			'Cleanup the system' \
 		3>&1 1>&2 2>&3)
