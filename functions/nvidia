@@ -8,7 +8,7 @@ DRIVERS="$dir/data/nvidia.list"
 function nvidia {
 	if (eval `resize` && whiptail \
 		--title "NVIDIA Drivers" \
-		--yesno "Drivers to install: \n\n$(cat $DEVTOOLS) \n\nProceed with installation?" \
+		--yesno "Drivers to install: \n\n$(cat $DRIVERS) \n\nProceed with installation?" \
 		$LINES $COLUMNS $(( $LINES - 12 )) \
 		--scrolltext) then
 		show_info 'Installing...'
@@ -28,8 +28,8 @@ function nvidia {
 			fi
 		done
 		# Wayland Support
-		dnf copr enable mati865/mutter-eglstream
-		dnf --disablerepo="*" --enablerepo="mati865-mutter-eglstream" reinstall mutter
+		sudo dnf copr enable mati865/mutter-eglstream
+		sudo dnf --disablerepo="*" --enablerepo="mati865-mutter-eglstream" reinstall mutter
 		# // Wayland Support
 		show_success 'Done.'
 		whiptail --title "Finished" --msgbox "Installation of NVIDIA drivers complete." 8 78
