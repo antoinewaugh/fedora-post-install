@@ -1,0 +1,37 @@
+#!/bin/bash
+
+dir="$(dirname "$0")"
+
+DEVTOOLS="$dir/data/development.list"
+
+# Install preferred development applications using the list of packages 'data/development.list'
+function development {
+	if (eval `resize` && whiptail \
+		--title "Preferred Development Applications" \
+		--yesno "Current list of preferred development tools to install: \n\n$(cat $DEVTOOLS) \n\nProceed with installation?" \
+		$LINES $COLUMNS $(( $LINES - 12 )) \
+		--scrolltext) then
+		show_info 'Installing...'
+		show_warning 'Requires root privileges'
+		# For loop for installing
+		for PACKAGE in $(cat $DEVTOOLS)
+		do
+			# Check if package is installed
+			PKGCHECK=$(dnf list installed | grep "$PACKAGE")
+			if [ "" == "$PKGCHECK" ]; then
+				show_info "Package '$PACKAGE' is not installed. Installing..."
+				# Install package
+				sudo dnf install -y $PACKAGE
+				show_success 'Done.'
+			else
+				show_success "Package '$PACKAGE' is installed."
+			fi
+		done
+		show_success 'Done.'
+		whiptail --title "Finished" --msgbox "Installation of your preferred development tools is complete." 8 78
+		main
+	else
+		main
+	fi
+}
+
