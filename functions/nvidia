@@ -5,7 +5,7 @@ dir="$(dirname "$0")"
 DEVTOOLS="$dir/data/nvidia.list"
 
 # Install preferred development applications using the list of packages 'data/development.list'
-function development {
+function nvidia {
 	if (eval `resize` && whiptail \
 		--title "NVIDIA Drivers" \
 		--yesno "Drivers to install: \n\n$(cat $DEVTOOLS) \n\nProceed with installation?" \
