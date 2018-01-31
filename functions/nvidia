@@ -2,7 +2,7 @@
 
 dir="$(dirname "$0")"
 
-DEVTOOLS="$dir/data/nvidia.list"
+DRIVERS="$dir/data/nvidia.list"
 
 # Install preferred development applications using the list of packages 'data/development.list'
 function nvidia {
@@ -14,7 +14,7 @@ function nvidia {
 		show_info 'Installing...'
 		show_warning 'Requires root privileges'
 		# For loop for installing
-		for PACKAGE in $(cat $DEVTOOLS)
+		for PACKAGE in $(cat $DRIVERS)
 		do
 			# Check if package is installed
 			PKGCHECK=$(dnf list installed | grep "$PACKAGE")
