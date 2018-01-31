@@ -37,6 +37,7 @@ dir="$(dirname "$0")"
 . $dir/functions/repos
 . $dir/functions/thirdparty
 . $dir/functions/update
+. $dir/functions/nvidia
 . $dir/functions/utilities
 
 
@@ -78,6 +79,7 @@ function main {
 		development		'Install favourite development tools' \
 		thirdparty		'Install third-party applications' \
 		repositories	'Add third-party repositories' \
+		nvidia		'Install NVIDIA Driver (requires third party repositories)' \
 		configure		'Configure system' \
 		cleanup			'Cleanup the system' \
 		3>&1 1>&2 2>&3)
