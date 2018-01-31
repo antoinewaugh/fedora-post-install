@@ -2,3 +2,4 @@ cmake
 gcc
 gcc-c++
 python3-devel.x86_64
+tmux
