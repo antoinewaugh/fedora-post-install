@@ -2,13 +2,13 @@
 
 dir="$(dirname "$0")"
 
-DEVTOOLS="$dir/data/development.list"
+DEVTOOLS="$dir/data/nvidia.list"
 
 # Install preferred development applications using the list of packages 'data/development.list'
 function development {
 	if (eval `resize` && whiptail \
-		--title "Preferred Development Applications" \
-		--yesno "Current list of preferred development tools to install: \n\n$(cat $DEVTOOLS) \n\nProceed with installation?" \
+		--title "NVIDIA Drivers" \
+		--yesno "Drivers to install: \n\n$(cat $DEVTOOLS) \n\nProceed with installation?" \
 		$LINES $COLUMNS $(( $LINES - 12 )) \
 		--scrolltext) then
 		show_info 'Installing...'
@@ -27,8 +27,12 @@ function development {
 				show_success "Package '$PACKAGE' is installed."
 			fi
 		done
+		# Wayland Support
+		dnf copr enable mati865/mutter-eglstream
+		dnf --disablerepo="*" --enablerepo="mati865-mutter-eglstream" reinstall mutter
+		# // Wayland Support
 		show_success 'Done.'
-		whiptail --title "Finished" --msgbox "Installation of your preferred development tools is complete." 8 78
+		whiptail --title "Finished" --msgbox "Installation of NVIDIA drivers complete." 8 78
 		main
 	else
 		main
