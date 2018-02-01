@@ -27,6 +27,17 @@ function nvidia {
 				show_success "Package '$PACKAGE' is installed."
 			fi
 		done
+
+		# Blacklist nouvea 
+sudo cat <<EOT >> /etc/modprobe.d/blacklist.conf
+blacklist nouveau
+options nouveau modeset=0
+EOT
+
+		
+		# Rebuild kernel initramfs
+		sudo dracut -v -f
+
 		# Wayland Support
 		sudo dnf copr enable mati865/mutter-eglstream
 		sudo dnf --disablerepo="*" --enablerepo="mati865-mutter-eglstream" reinstall mutter
