@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Pycharm
+function pycharm {
+	show_info 'Downloading PyCharm...'
+	PACKAGE=pycharm-community
+	NAME="PyCharm Community"
+	# Check if already installed
+	echo 'Checking if '$NAME' is already installed...'
+	PKGCHECK=$(dnf list installed | grep "$PACKAGE")
+		if [ "" == "$PKGCHECK" ]; then
+			echo $NAME 'is not installed. Proceeding'
+			show_info 'Downloading '$NAME'...'
+			echo 'Installing...'
+			sudo dnf -y copr enable phracek/PyCharm 
+			show_info 'Requires root privileges:'
+			sudo dnf -y install pycharm-community
+		fi
+	# Finished
+	show_success 'Done.'
+	whiptail --title "Finished" --msgbox "Installation complete." 8 78
+	thirdparty
+}

@@ -8,6 +8,7 @@ source $dir/functions/third-party/minecraft
 source $dir/functions/third-party/oracle-java
 source $dir/functions/third-party/rvm
 source $dir/functions/third-party/slack
+source $dir/functions/third-party/pycharm
 source $dir/functions/third-party/sublime-text
 
 # Install Third-Party Applications
@@ -26,6 +27,7 @@ function thirdparty {
 		'oracle-java'		'Oracle Java' \
 		'rvm'				'Ruby Version Manager (RVM)' \
 		'slack'				'Slack' \
+		'pycharm'			'PyCharm' \
 		'sublime-text'		'Sublime Text 3' \
 		3>&1 1>&2 2>&3)
 	 
