@@ -13,8 +13,9 @@ function machinelearning {
 		--scrolltext) then
 		show_info 'Installing...'
 		show_warning 'Requires root privileges'
-    # Update pip
-    pip3.6 install --upgrade pip
+
+		# Update pip
+		pip3.6 install --upgrade pip 
 		# For loop for installing
 		for PACKAGE in $(cat $MLTOOLS)
 		do
@@ -29,6 +30,16 @@ function machinelearning {
 				show_success "Package '$PACKAGE' is installed."
 			fi
 		done
+
+		PACKAGE=python3-tkinter
+		PKGCHECK=$(dnf list installed | grep "$PACKAGE")
+			if [ "" == "$PKGCHECK" ]; then
+				echo $NAME 'is not installed. Proceeding'
+				show_info 'Downloading '$NAME'...'
+				echo 'Installing...'
+				sudo dnf -y install $PACKAGE
+			fi
+
 		show_success 'Done.'
 		whiptail --title "Finished" --msgbox "Installation of ML tools complete." 8 78
 		main
