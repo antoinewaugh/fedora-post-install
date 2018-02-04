@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Teamviewer 
+function teamviewer {
+	# Add repository
+	show_info 'Downloading Teamviewer...'
+	show_info 'Requires root privileges:'
+	sudo dnf install -y https://download.teamviewer.com/download/linux/teamviewer-host.x86_64.rpm
+	show_success 'Done.'
+	# Done
+	whiptail --title "Finished" --msgbox "Installation complete." 8 78
+	thirdparty
+}
