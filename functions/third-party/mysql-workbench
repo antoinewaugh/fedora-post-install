@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# mysql workbench
+function mysql-workbench {
+eval `resize` 
+exitstatus=$?
+if [ $exitstatus = 0 ]; then
+	status="0"
+	while [ "$status" -eq 0 ]  
+	do
+		# Variables
+		PACKAGE=mysql-workbench
+		NAME="MySql Workbench"
+		# Check if already installed
+		echo 'Checking if '$NAME' is already installed...'
+		PKGCHECK=$(dnf list installed | grep "$PACKAGE")
+		if [ "" == "$PKGCHECK" ]; then
+			echo $NAME 'is not installed. Proceeding'
+			show_info 'Downloading '$NAME'...'
+			# Download RPM file that matches system architecture
+			wget https://dev.mysql.com/get/Downloads/MySQLGUITools/mysql-workbench-community-6.3.10-1.fc27.x86_64.rpm
+			
+			# Install package(s)
+			show_info 'Installing '$NAME'...'
+			show_warning 'Requires root privileges'
+			sudo dnf --nogpgcheck install -y $PACKAGE*.rpm
+			# Cleanup and finish
+			rm $PACKAGE*.rpm
+			# Done
+			show_success 'Done.'
+			whiptail --title "Finished" --msgbox "Installation of $NAME complete." 8 78
+			status=1
+			thirdparty
+		else
+			# Already installed
+			show_success $NAME 'already installed.'
+			whiptail --title "Finished" --msgbox "$NAME is already installed." 8 78
+			thirdparty
+		fi
+	done
+else
+	thirdparty
+fi
+}
