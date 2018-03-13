@@ -1,0 +1,14 @@
+#!/bin/bash
+
+BUILD=3126
+
+# Skype
+function skype {
+	echo 'Installing...'
+	show_info 'Requires root privileges:'
+	sudo dnf -y install https://repo.skype.com/latest/skypeforlinux-64-alpha.rpm
+	show_success 'Done.'
+	# Finished
+	whiptail --title "Finished" --msgbox "Installation complete." 8 78
+	thirdparty
+}
