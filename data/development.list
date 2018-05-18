@@ -4,3 +4,5 @@ gcc-c++
 python3-devel.x86_64
 tmux
 vim
+clang
+clang-tools-extra

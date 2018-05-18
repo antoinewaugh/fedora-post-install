@@ -12,6 +12,7 @@ source $dir/functions/third-party/slack
 source $dir/functions/third-party/pycharm
 source $dir/functions/third-party/sublime-text
 source $dir/functions/third-party/skype
+source $dir/functions/third-party/stdman
 
 # Install Third-Party Applications
 function thirdparty {
@@ -33,6 +34,7 @@ function thirdparty {
 		'pycharm'			'PyCharm' \
 		'sublime-text'			'Sublime Text 3' \
 		'skype'				'Skype' \
+		'stdman'				'Access c++ manuals using the man command' \
 		3>&1 1>&2 2>&3)
 	 
 	exitstatus=$?
